@@ -1,0 +1,84 @@
+Isomorphic string
+An isomorphic string is a string in which all characters of one string can be replaced to get another string
+
+Problem:
+Given two strings s and determine if they are isomorphic.
+
+Two strings s and t are isomorphic if the characters in s can be replaced to get t.
+
+All occurrences of a character must be replaced with another character while preserving the order of characters. No two characters may map to the same character, but a character may map to itself.
+
+Example 1:
+
+Input: s = "egg", t = "add"
+Output: true
+
+Example 2:
+
+Input: s = "foo", t = "bar"
+Output: false
+
+Solution:
+You want to map the characters in the first 
+
+class Solution:
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        hmapST, hmapTS= {},{}
+        
+        for i in range(len(s)):
+            c1,c2= s[i],t[i]
+            if (c1 in hmapST and hmapST[c1]!=c2) or (c2 in hmapTS and hmapTS[c2]!=c1):
+                return False
+            
+            hmapST[c1]=c2
+            hmapTS[c2]=c1
+        
+        return True
+        
+ Alternatively:
+ class Solution:
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        hmapST, hmapTS= {},{}
+        
+        for c1,c2 in zip (s,t): (zip function used to iterate through two strings at the same time)
+            if (c1 in hmapST and hmapST[c1]!=c2) or (c2 in hmapTS and hmapTS[c2]!=c1):
+                return False
+            
+            hmapST[c1]=c2
+            hmapTS[c2]=c1
+        
+        return True
+        
+  
+  
+  Problem two: 
+  Given two strings s and t, return true if s is a subsequence of t, or false otherwise.
+
+A subsequence of a string is a new string that is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. (i.e., "ace" is a subsequence of "abcde" while "aec" is not).
+
+ 
+
+Example 1:
+
+Input: s = "abc", t = "ahbgdc"
+Output: true
+Example 2:
+
+Input: s = "axc", t = "ahbgdc"
+Output: false
+
+class Solution:
+    def isSubsequence(self, s: str, t: str) -> bool:
+        i,j= 0,0
+        
+        while i<len(s) and j<len(t):
+            if s[i]==t[j]:
+                i+=1
+            j+=1
+            
+        if i==len(s): 
+            return True 
+        else: 
+            return False
+              
+                

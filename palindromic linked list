@@ -1,0 +1,46 @@
+Approach 1: O(n) space O(n) time
+class Solution:
+    def isPalindrome(self, head: Optional[ListNode]) -> bool:
+        nums=[] #Empty array created
+        curr= head
+        #Load values of the linked list into our array
+        while curr:
+            nums.append(curr.val)
+            curr=curr.next
+            
+        #Use two pointers on the now created array to test for palindromicity
+        left, right = 0, len(nums)-1
+        while(left<=right):
+            if nums[left]!=nums[right]:
+                return False
+            left+=1
+            right-=1
+            
+        return True
+
+
+Approach 2: O(n) time O(1) space
+class Solution:
+    def isPalindrome(self, head: Optional[ListNode]) -> bool:
+        #Initialize two pointers; a fast and a slow one so that we get to the middle
+        slow, fast= head, head
+        while fast and fast.next:
+                slow=slow.next
+                fast= fast.next.next
+    
+        #reverse the linked List
+        prev=None
+        while slow:
+            tmp= slow.next
+            slow.next= prev
+            prev=slow
+            slow=tmp
+        #check for palindromicity
+        left, right= head, prev
+        while right:
+            if (left.val!= right.val):
+                return False
+            left= left.next
+            right=right.next
+        return True
+        

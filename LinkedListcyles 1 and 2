@@ -1,0 +1,43 @@
+Linked List cycle 2:
+class Solution:
+    def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        curr= head
+        track=set()
+        while curr:
+            if curr in track:
+                return curr
+            else:
+                track.add(curr)
+                curr=curr.next
+        return None
+        
+ 
+ 
+ Linked List cycle 1:
+ O(n) space and O(n) time
+ Approach 1:
+ class Solution:
+    def hasCycle(self, head: Optional[ListNode]) -> bool:
+        curr= head
+        tracker= set()
+        while curr:
+            if curr in tracker:
+                return True
+            else:
+                tracker.add(curr)
+                curr= curr.next
+        
+        return False
+   
+   Approach 2:
+   O(n) time O(1) space: Two pointers; fast and slow
+   class Solution:
+    def hasCycle(self, head: Optional[ListNode]) -> bool:
+        fast, slow= head, head
+        while fast and fast.next:
+            slow= slow.next
+            fast= fast.next.next
+            if slow==fast:
+                return True
+        return False
+        
